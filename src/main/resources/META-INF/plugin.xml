@@ -1,0 +1,42 @@
+<idea-plugin>
+    <id>com.danmarshall.tddhelper</id>
+    <name>TddHelper</name>
+    <vendor>Dan Marshall</vendor>
+    <description><![CDATA[
+        Enhances Test-Driven Development workflows in Rider with visual feedback and navigation tools.
+        <ul>
+            <li>Red title bar when tests fail</li>
+            <li>Failed test names in the title bar</li>
+            <li>Quick navigation to failed tests</li>
+            <li>Automatic test execution after idle period</li>
+        </ul>
+    ]]></description>
+
+    <depends>com.intellij.modules.rider</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Services -->
+        <applicationService serviceImplementation="com.danmarshall.tddhelper.services.TestResultsTracker"/>
+        <applicationService serviceImplementation="com.danmarshall.tddhelper.services.UIDecorator"/>
+        
+        <!-- Phase 2 -->
+        <!-- <applicationService serviceImplementation="com.danmarshall.tddhelper.services.TitleManager"/> -->
+        
+        <!-- Phase 3 -->
+        <!-- <projectService serviceImplementation="com.danmarshall.tddhelper.services.AutoTestRunner"/> -->
+        
+        <!-- Phase 4 -->
+        <!-- <applicationConfigurable instance="com.danmarshall.tddhelper.settings.TddHelperConfigurable"/> -->
+    </extensions>
+
+    <actions>
+        <action id="TddHelper.GotoNextFailedTest"
+                class="com.danmarshall.tddhelper.actions.GotoNextFailedTestAction"
+                text="Go to Next Failed Test"
+                description="Navigate to the next failed test">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <!-- Default keyboard shortcut -->
+            <keyboard-shortcut first-keystroke="alt F12" keymap="$default"/>
+        </action>
+    </actions>
+</idea-plugin>
