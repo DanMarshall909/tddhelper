@@ -16,11 +16,7 @@ jobs:
           java-version: "17"
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
-      - name: Clean Gradle cache
-        run: rm -rf ~/.gradle/caches
-      - name: Gradle Clean
-        run: ./gradlew clean
-      - name: Run Tests
-        run: ./gradlew test --refresh-dependencies
-        env:
-          GRADLE_USER_HOME: ${{ github.workspace }}/.gradle
+      - name: Force Clean Gradle Cache
+        run: rm -rf ~/.gradle/caches/jars-*
+      - name: Run Tests with Debug
+        run: ./gradlew test --debug
