@@ -14,6 +14,10 @@ The memory bank contains the following documents:
 
 ## Plugin Overview
 
+<!-- Plugin description -->
+TddHelper enhances JetBrains Rider with tools that support Test-Driven Development.
+<!-- Plugin description end -->
+
 TddHelper enhances Test-Driven Development workflows in Rider with:
 
 1. **Visual Feedback on Test Status**
@@ -71,25 +75,16 @@ To contribute to the TddHelper plugin:
    - **Windows (cmd)**: `setup-all.bat`
    - **PowerShell**: `./setup-all.ps1`
 3. Review the memory bank documents to understand the architecture and features
-4. Open the project in IntelliJ IDEA
-5. Build the plugin with:
-   - **Unix/macOS/PowerShell**:
-     ```
-     ./gradlew buildPlugin
-     ```
-   - **Windows (cmd)**:
-     ```
-     gradlew.bat buildPlugin
-     ```
-6. Run the plugin in a development instance with:
-   - **Unix/macOS/PowerShell**:
-     ```
-     ./gradlew runIde
-     ```
-   - **Windows (cmd)**:
-     ```
-     gradlew.bat runIde
-     ```
+4. Update `gradle.properties` if you need to change the plugin group, version, or target IDE
+5. Open the project in IntelliJ IDEA
+6. Build the plugin with:
+   ```
+   ./gradlew buildPlugin
+   ```
+7. Run the plugin in a development instance with:
+   ```
+   ./gradlew runIde
+   ```
 
 For more detailed instructions, see [CONTRIBUTING.md](CONTRIBUTING.md).
 

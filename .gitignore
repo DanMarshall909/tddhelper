@@ -30,6 +30,16 @@ gradle-app.setting
 hs_err_pid*
 replay_pid*
 
+# Java heap dumps
+*.hprof
+
+# Downloaded Gradle distributions
+gradle-download/
+gradle-download-*/
+
+# IntelliJ Platform artifacts
+.intellijPlatform/
+
 # OS-specific
 .DS_Store
 .DS_Store?
