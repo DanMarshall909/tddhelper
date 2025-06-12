@@ -22,7 +22,5 @@ jobs:
         run: |
           rm -rf ~/.gradle/caches/jars-*
           rm -rf ~/.gradle/caches/modules-*
-      - name: Build Plugin (Skip Tests)
-        run: ./gradlew clean build -x test
       - name: Verify Plugin Structure
         run: ./gradlew verifyPlugin
