@@ -3,7 +3,8 @@ package com.danmarshall.tddhelper.services
 import com.intellij.execution.testframework.AbstractTestProxy
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import org.mockito.Mockito.*
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class TestResultsTrackerTest : BasePlatformTestCase() {
 
@@ -20,14 +21,14 @@ class TestResultsTrackerTest : BasePlatformTestCase() {
     }
 
     fun testUpdateTestResultsWithFailedTests() {
-        val failingTest = mock(AbstractTestProxy::class.java)
-        `when`(failingTest.isDefect).thenReturn(true)
-        `when`(failingTest.isInProgress).thenReturn(false)
-        `when`(failingTest.getAllTests()).thenReturn(listOf(failingTest))
+        val failingTest = mock<AbstractTestProxy>()
+        whenever(failingTest.isDefect).thenReturn(true)
+        whenever(failingTest.isInProgress).thenReturn(false)
+        whenever(failingTest.getAllTests()).thenReturn(listOf(failingTest))
 
-        val root = mock(AbstractTestProxy::class.java)
-        `when`(root.isDefect).thenReturn(true)
-        `when`(root.getAllTests()).thenReturn(listOf(failingTest))
+        val root = mock<AbstractTestProxy>()
+        whenever(root.isDefect).thenReturn(true)
+        whenever(root.getAllTests()).thenReturn(listOf(failingTest))
 
         // Directly call updateTestResults since we simplified the implementation
         tracker.updateTestResults(root)
@@ -37,8 +38,8 @@ class TestResultsTrackerTest : BasePlatformTestCase() {
     }
 
     fun testAddFailedTest() {
-        val failingTest = mock(AbstractTestProxy::class.java)
-        `when`(failingTest.isDefect).thenReturn(true)
+        val failingTest = mock<AbstractTestProxy>()
+        whenever(failingTest.isDefect).thenReturn(true)
 
         tracker.addFailedTest(failingTest)
 
@@ -47,8 +48,8 @@ class TestResultsTrackerTest : BasePlatformTestCase() {
     }
 
     fun testClearResults() {
-        val failingTest = mock(AbstractTestProxy::class.java)
-        `when`(failingTest.isDefect).thenReturn(true)
+        val failingTest = mock<AbstractTestProxy>()
+        whenever(failingTest.isDefect).thenReturn(true)
 
         tracker.addFailedTest(failingTest)
         assertTrue(tracker.hasFailures())
