@@ -67,3 +67,4 @@ atlassian-ide-plugin.xml
 !.vscode/extensions.json
 *.code-workspace
 .history/
+!gradle/wrapper/gradle-wrapper.jar
