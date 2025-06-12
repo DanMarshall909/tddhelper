@@ -22,7 +22,6 @@ class UIDecorator {
                 }
             })
     }
-ECHO is off.
     private fun updateTitleBar(hasFailures: Boolean) {
         val frame = ApplicationManager.getApplication().getComponent(JFrame::class.java)
         if (frame != null) {
