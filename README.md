@@ -67,17 +67,17 @@ To contribute to the TddHelper plugin:
 1. Clone this repository
 2. Run the setup script to create the project structure:
    ```
-   .\setup-all.bat
+   ./setup-all.sh
    ```
 3. Review the memory bank documents to understand the architecture and features
 4. Open the project in IntelliJ IDEA
 5. Build the plugin with:
    ```
-   .\gradlew buildPlugin
+   ./gradlew buildPlugin
    ```
 6. Run the plugin in a development instance with:
    ```
-   .\gradlew runIde
+   ./gradlew runIde
    ```
 
 For more detailed instructions, see [CONTRIBUTING.md](CONTRIBUTING.md).
