@@ -88,6 +88,10 @@ To contribute to the TddHelper plugin:
 
 For more detailed instructions, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## CI/CD
+
+This repository uses GitHub Actions to run tests on pull requests and to publish new plugin versions on release creation.
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
