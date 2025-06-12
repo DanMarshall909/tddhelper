@@ -12,10 +12,8 @@ import com.intellij.openapi.application.ApplicationManager
 class TestResultsTracker {
     private var failedTests = listOf<AbstractTestProxy>()
     private var hasFailures = false
-ECHO is off.
     // MessageBus for publishing events
     private val messageBus = ApplicationManager.getApplication().messageBus
-ECHO is off.
     init {
         // Subscribe to test events
         ApplicationManager.getApplication().messageBus
@@ -26,7 +24,6 @@ ECHO is off.
                 }
             })
     }
-ECHO is off.
     private fun updateTestResults(root: AbstractTestProxy) {
         hasFailures = root.isDefect
         failedTests = if (hasFailures) {
@@ -34,16 +31,12 @@ ECHO is off.
         } else {
             emptyList()
         }
-ECHO is off.
         // Notify listeners
         messageBus.syncPublisher(TEST_STATUS_TOPIC).onTestStatusChanged(hasFailures, failedTests)
     }
-ECHO is off.
     private fun collectFailedTests(root: AbstractTestProxy): List<AbstractTestProxy> {
         return root.getAllTests().filter { it.isDefect && !it.isInProgress }
     }
-ECHO is off.
     fun getFailedTests(): List<AbstractTestProxy> = failedTests
-ECHO is off.
     fun hasFailures(): Boolean = hasFailures
 }
