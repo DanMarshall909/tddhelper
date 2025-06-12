@@ -65,20 +65,31 @@ The plugin will be developed in four phases:
 To contribute to the TddHelper plugin:
 
 1. Clone this repository
-2. Run the setup script to create the project structure:
-   ```
-   ./setup-all.sh
-   ```
+2. Run the setup script to create the project structure. Choose the script for
+   your environment:
+   - **Unix/macOS (bash)**: `./setup-all.sh`
+   - **Windows (cmd)**: `setup-all.bat`
+   - **PowerShell**: `./setup-all.ps1`
 3. Review the memory bank documents to understand the architecture and features
 4. Open the project in IntelliJ IDEA
 5. Build the plugin with:
-   ```
-   ./gradlew buildPlugin
-   ```
+   - **Unix/macOS/PowerShell**:
+     ```
+     ./gradlew buildPlugin
+     ```
+   - **Windows (cmd)**:
+     ```
+     gradlew.bat buildPlugin
+     ```
 6. Run the plugin in a development instance with:
-   ```
-   ./gradlew runIde
-   ```
+   - **Unix/macOS/PowerShell**:
+     ```
+     ./gradlew runIde
+     ```
+   - **Windows (cmd)**:
+     ```
+     gradlew.bat runIde
+     ```
 
 For more detailed instructions, see [CONTRIBUTING.md](CONTRIBUTING.md).
 

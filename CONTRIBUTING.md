@@ -18,20 +18,31 @@ This document provides guidelines and instructions for contributing to the TddHe
    cd tddhelper
    ```
 
-2. Open the project in IntelliJ IDEA:
+2. Run the setup script that matches your environment to generate the basic
+   project structure:
+   - **Unix/macOS (bash)**: `./setup-all.sh`
+   - **Windows (cmd)**: `setup-all.bat`
+   - **PowerShell**: `./setup-all.ps1`
+
+3. Open the project in IntelliJ IDEA:
    - Select "Open" from the welcome screen
    - Navigate to the cloned repository
    - Select the `build.gradle.kts` file and click "Open as Project"
-
-3. Wait for the Gradle sync to complete
+4. Wait for the Gradle sync to complete
 
 ### Building the Plugin
 
-To build the plugin, run:
+To build the plugin, run the Gradle wrapper. Use the command that matches your
+environment:
 
-```
-./gradlew buildPlugin
-```
+- **Unix/macOS/PowerShell**:
+  ```
+  ./gradlew buildPlugin
+  ```
+- **Windows (cmd)**:
+  ```
+  gradlew.bat buildPlugin
+  ```
 
 This will create a plugin distribution in `build/distributions/tddhelper-[version].zip`.
 
@@ -39,9 +50,14 @@ This will create a plugin distribution in `build/distributions/tddhelper-[versio
 
 To run the plugin in a development instance of Rider:
 
-```
-./gradlew runIde
-```
+- **Unix/macOS/PowerShell**:
+  ```
+  ./gradlew runIde
+  ```
+- **Windows (cmd)**:
+  ```
+  gradlew.bat runIde
+  ```
 
 This will start a new instance of Rider with the plugin installed.
 
@@ -63,7 +79,8 @@ This will start a new instance of Rider with the plugin installed.
    - Write failing tests first
    - Implement the minimum code to make tests pass
    - Refactor while keeping tests green
-3. Ensure all tests pass with `./gradlew test`
+3. Ensure all tests pass with the Gradle wrapper (`./gradlew test` on Unix or
+   PowerShell, `gradlew.bat test` on Windows)
 4. Submit a pull request
 
 ## Coding Guidelines
@@ -78,9 +95,14 @@ This will start a new instance of Rider with the plugin installed.
 
 Run tests with:
 
-```
-./gradlew test
-```
+- **Unix/macOS/PowerShell**:
+  ```
+  ./gradlew test
+  ```
+- **Windows (cmd)**:
+  ```
+  gradlew.bat test
+  ```
 
 ## Debugging
 
