@@ -14,8 +14,6 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "17"
-      - name: Check Java Version
-        run: java -version
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
         with:
@@ -24,5 +22,12 @@ jobs:
         run: |
           rm -rf ~/.gradle/caches/jars-*
           rm -rf ~/.gradle/caches/modules-*
+      - name: Remove all Gradle caches and lockfiles
+        run: |
+          rm -rf ~/.gradle/caches
+          rm -rf ~/.gradle/daemon
+          rm -rf ~/.gradle/native
+          rm -rf ~/.gradle/wrapper
+          rm -rf ~/.gradle/*.lock
       - name: Verify Plugin Structure
-        run: ./gradlew verifyPlugin
+        run: ./gradlew verifyPlugin --refresh-dependencies --stacktrace
