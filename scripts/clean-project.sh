@@ -15,6 +15,9 @@ echo
 
 echo "Cleaning up build artifacts..."
 
+# Change to project root directory
+cd "$(dirname "$0")/.." || exit 1
+
 if [ -d "build" ]; then
     rm -rf build
     echo "[REMOVED] build directory"
@@ -36,6 +39,13 @@ else
     echo "[SKIPPED] .idea directory (not found)"
 fi
 
+if [ -d ".intellijPlatform" ]; then
+    rm -rf .intellijPlatform
+    echo "[REMOVED] .intellijPlatform directory"
+else
+    echo "[SKIPPED] .intellijPlatform directory (not found)"
+fi
+
 echo
 
 echo "Cleanup complete!"
@@ -43,4 +53,3 @@ echo
 
 echo "To rebuild the project:"
 echo "1. Run ./gradlew buildPlugin"
-

@@ -1,38 +1,60 @@
 package com.danmarshall.tddhelper.services
 
 import com.intellij.execution.testframework.AbstractTestProxy
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import org.mockito.Mockito.*
 
-class TestResultsTrackerTest {
+class TestResultsTrackerTest : BasePlatformTestCase() {
 
-    // This is a placeholder test class that would be expanded with actual tests
-    // In a real implementation, we would use proper mocking of IntelliJ components
-    
-    @Test
-    fun `test initial state has no failures`() {
-        // In a real test, we would properly mock the ApplicationManager and other components
-        // For now, this is just a placeholder to demonstrate the test structure
-        
-        // val tracker = TestResultsTracker()
-        // assertFalse(tracker.hasFailures())
-        // assertTrue(tracker.getFailedTests().isEmpty())
-        
-        // Placeholder assertion to make the test pass
-        assertTrue(true)
+    private lateinit var tracker: TestResultsTracker
+
+    override fun setUp() {
+        super.setUp()
+        tracker = ApplicationManager.getApplication().getService(TestResultsTracker::class.java)
     }
-    
-    @Test
-    fun `test updateTestResults with failed tests`() {
-        // In a real test, we would:
-        // 1. Create mock AbstractTestProxy objects
-        // 2. Configure them to return appropriate values for isDefect, etc.
-        // 3. Call updateTestResults with the mock
-        // 4. Verify that hasFailures is true and failedTests contains the expected tests
-        
-        // Placeholder assertion to make the test pass
-        assertTrue(true)
+
+    fun testInitialStateHasNoFailures() {
+        assertFalse(tracker.hasFailures())
+        assertTrue(tracker.getFailedTests().isEmpty())
+    }
+
+    fun testUpdateTestResultsWithFailedTests() {
+        val failingTest = mock(AbstractTestProxy::class.java)
+        `when`(failingTest.isDefect).thenReturn(true)
+        `when`(failingTest.isInProgress).thenReturn(false)
+        `when`(failingTest.getAllTests()).thenReturn(listOf(failingTest))
+
+        val root = mock(AbstractTestProxy::class.java)
+        `when`(root.isDefect).thenReturn(true)
+        `when`(root.getAllTests()).thenReturn(listOf(failingTest))
+
+        // Directly call updateTestResults since we simplified the implementation
+        tracker.updateTestResults(root)
+
+        assertTrue(tracker.hasFailures())
+        assertEquals(listOf(failingTest), tracker.getFailedTests())
+    }
+
+    fun testAddFailedTest() {
+        val failingTest = mock(AbstractTestProxy::class.java)
+        `when`(failingTest.isDefect).thenReturn(true)
+
+        tracker.addFailedTest(failingTest)
+
+        assertTrue(tracker.hasFailures())
+        assertEquals(listOf(failingTest), tracker.getFailedTests())
+    }
+
+    fun testClearResults() {
+        val failingTest = mock(AbstractTestProxy::class.java)
+        `when`(failingTest.isDefect).thenReturn(true)
+
+        tracker.addFailedTest(failingTest)
+        assertTrue(tracker.hasFailures())
+
+        tracker.clearResults()
+        assertFalse(tracker.hasFailures())
+        assertTrue(tracker.getFailedTests().isEmpty())
     }
 }

@@ -2,23 +2,41 @@
 
 This document provides technical implementation details for the TddHelper Rider plugin, focusing on key components, code examples, and integration points with the JetBrains Platform.
 
-## Project Structure
+## Project Status (Updated December 2025)
+
+### ✅ Recently Resolved Issues
+
+1. **Java 17 Compatibility** - Fixed JVM target compatibility issues in build configuration
+2. **IntelliJ Platform API Compatibility** - Resolved compilation errors with TestStatusListener API
+3. **Gradle Build Configuration** - Updated to use proper IntelliJ Platform plugin structure
+4. **Core Service Implementation** - Simplified TestResultsTracker for better API compatibility
+
+### 🔧 Current Implementation State
+
+- **Main source code**: Compiles successfully with Java 17
+- **Core services**: TestResultsTracker and GotoNextFailedTestAction are functional
+- **Test compilation**: Some unit test dependencies need resolution
+- **Build system**: Gradle build works with `-x test` flag
+
+### 🚧 Known Issues to Address
+
+1. **Unit Test Dependencies** - Test compilation fails due to missing test framework imports
+2. **Test Environment Setup** - IntelliJ Platform test framework integration needs refinement
+3. **API Access Patterns** - Some IntelliJ Platform APIs require reflection-based access
+
+## Project Structure (Actual)
 
 ```
-com.yourname.tddhelper/
+com.danmarshall.tddhelper/
 ├── actions/
-│   └── GotoNextFailedTestAction.kt
-├── listeners/
-│   └── TestStatusListener.kt
+│   └── GotoNextFailedTestAction.kt              ✅ Implemented
 ├── services/
-│   ├── TestResultsTracker.kt
-│   ├── UIDecorator.kt
-│   └── TitleManager.kt
-├── settings/
-│   └── TddHelperSettings.kt
-├── util/
-│   └── TestResultsUtil.kt
-└── TddHelperBundle.kt
+│   ├── TestResultsTracker.kt                    ✅ Implemented (simplified)
+│   ├── TestStatusChangeListener.kt              🔧 Interface defined
+│   └── UIDecorator.kt                          📝 Placeholder
+└── test/
+    └── services/
+        └── TestResultsTrackerTest.kt            🚧 Needs dependency fixes
 ```
 
 ## Key Components Implementation

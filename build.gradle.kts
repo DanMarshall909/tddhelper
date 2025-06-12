@@ -18,7 +18,7 @@ group = prop("pluginGroup").get()
 version = prop("pluginVersion").get()
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(17)
 }
 
 repositories {

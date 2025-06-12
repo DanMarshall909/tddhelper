@@ -69,10 +69,11 @@ The plugin will be developed in four phases:
 To contribute to the TddHelper plugin:
 
 1. Clone this repository
-2. Run the setup script to create the project structure:
-   ```
-   ./setup-all.sh
-   ```
+2. Run the setup script to create the project structure. Choose the script for
+   your environment:
+   - **Unix/macOS (bash)**: `./setup-all.sh`
+   - **Windows (cmd)**: `setup-all.bat`
+   - **PowerShell**: `./setup-all.ps1`
 3. Review the memory bank documents to understand the architecture and features
 4. Update `gradle.properties` if you need to change the plugin group, version, or target IDE
 5. Open the project in IntelliJ IDEA
@@ -86,6 +87,10 @@ To contribute to the TddHelper plugin:
    ```
 
 For more detailed instructions, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## CI/CD
+
+This repository uses GitHub Actions to run tests on pull requests and to publish new plugin versions on release creation.
 
 ## License
 

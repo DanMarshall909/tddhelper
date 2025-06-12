@@ -1,42 +1,49 @@
 package com.danmarshall.tddhelper.services
 
 import com.intellij.execution.testframework.AbstractTestProxy
-import com.intellij.execution.testframework.TestStatusListener
 import com.intellij.openapi.components.Service
-import com.intellij.openapi.application.ApplicationManager
 
 /**
  * Service that tracks test results.
  */
 @Service
 class TestResultsTracker {
-    private var failedTests = listOf<AbstractTestProxy>()
+    private var failedTests = mutableListOf<AbstractTestProxy>()
     private var hasFailures = false
-    // MessageBus for publishing events
-    private val messageBus = ApplicationManager.getApplication().messageBus
-    init {
-        // Subscribe to test events
-        ApplicationManager.getApplication().messageBus
-            .connect()
-            .subscribe(TestStatusListener.TEST_STATUS, object : TestStatusListener {
-                override fun testSuiteFinished(root: AbstractTestProxy) {
-                    updateTestResults(root)
-                }
-            })
-    }
-    private fun updateTestResults(root: AbstractTestProxy) {
+    
+    /**
+     * Manually update test results - can be called from external listeners
+     */
+    fun updateTestResults(root: AbstractTestProxy) {
         hasFailures = root.isDefect
-        failedTests = if (hasFailures) {
-            collectFailedTests(root)
-        } else {
-            emptyList()
+        failedTests.clear()
+        if (hasFailures) {
+            failedTests.addAll(collectFailedTests(root))
         }
-        // Notify listeners
-        messageBus.syncPublisher(TEST_STATUS_TOPIC).onTestStatusChanged(hasFailures, failedTests)
     }
+    
+    /**
+     * Add a failed test to the tracker
+     */
+    fun addFailedTest(test: AbstractTestProxy) {
+        if (test.isDefect && !failedTests.contains(test)) {
+            failedTests.add(test)
+            hasFailures = true
+        }
+    }
+    
+    /**
+     * Clear all tracked test results
+     */
+    fun clearResults() {
+        failedTests.clear()
+        hasFailures = false
+    }
+    
     private fun collectFailedTests(root: AbstractTestProxy): List<AbstractTestProxy> {
         return root.getAllTests().filter { it.isDefect && !it.isInProgress }
     }
-    fun getFailedTests(): List<AbstractTestProxy> = failedTests
+    
+    fun getFailedTests(): List<AbstractTestProxy> = failedTests.toList()
     fun hasFailures(): Boolean = hasFailures
 }
